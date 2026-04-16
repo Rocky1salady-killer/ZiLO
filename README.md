@@ -18,20 +18,20 @@ This block replaces standard MobileNet-style blocks throughout both the backbone
 
 ## Installation
 
-### Step 1 — Create a conda environment
+### Create a conda environment
 
 ```bash
 conda create -n zilo python=3.10 -y
 conda activate zilo
 ```
 
-### Step 2 — Install dependencies
+### Install dependencies
 
 ```bash
 pip install huggingface_hub timm ultralytics "numpy<2"
 ```
 
-### Step 3 — Set PYTHONPATH
+### PYTHONPATH
 
 Replace the path below with the absolute path to your local copy of this repo:
 
@@ -39,7 +39,7 @@ Replace the path below with the absolute path to your local copy of this repo:
 export PYTHONPATH=/path/to/ZiLO
 ```
 
-### Step 4 — Install the package in editable mode
+### Install the package in editable mode
 
 ```bash
 cd ZiLO
