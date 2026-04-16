@@ -1,0 +1,10 @@
+# Create Custom Dataset Configuration
+path: 
+train: E:/Caltech-Pedestrian-Dataset/2/datasets/images/train
+val: E:/Caltech-Pedestrian-Dataset/2/datasets/images/test
+    
+nc: 1
+    
+names: [
+    'person'
+]

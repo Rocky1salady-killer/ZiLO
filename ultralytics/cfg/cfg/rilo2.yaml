@@ -1,0 +1,50 @@
+nc: 80  # number of classes
+scales:
+  # [depth, width, max_channels]
+  n: [1.0, 1.0, 320]
+
+# Rilo1 Nano backbone
+backbone:
+  # [from, repeats, module, args]
+  - [-1, 1, mn_conv, [16, 3, 2, "SI"]]
+  - [-1, 1, mn_conv, [16, 1, 1, "SI"]]
+  - [-1, 1, RepViTBlock, [16, 3, 16, False, "SI", 2, False, 32]]  # Early layer: keep RepViTBlock for efficiency
+  - [-1, 1, RepViTBlock, [16, 3, 96, False, "SI", 2, False, 32]]  # Early layer: keep RepViTBlock
+  - [-1, 1, RepViTBlock, [32, 3, 96, False, "SI", 1, False, 64]]  # Early layer: keep RepViTBlock
+  - [-1, 1, UltraRepViTBlock, [64, [3, 5, 7], 96, True, "SI", 2, 4, 128, 4]]  # Deeper layer: use UltraRepViTBlock
+  - [-1, 1, UltraRepViTBlock, [64, [3, 5, 7], 192, True, "SI", 1, 4, 128, 4]]  # Deeper layer: use UltraRepViTBlock
+  - [-1, 1, UltraRepViTBlock, [64, [3, 5, 7], 192, True, "SI", 1, 4, 128, 4]]  # Deeper layer: use UltraRepViTBlock
+  - [-1, 1, UltraRepViTBlock, [64, [3, 5, 7], 192, True, "SI", 1, 4, 128, 4]]  # Deeper layer: use UltraRepViTBlock
+  - [-1, 1, UltraRepViTBlock, [64, [3, 5, 7], 192, True, "SI", 1, 4, 128, 4]]  # Deeper layer: use UltraRepViTBlock
+  - [-1, 1, UltraRepViTBlock, [96, [3, 5, 7], 576, True, "SI", 2, 4, 192, 4]]  # Deeper layer: use UltraRepViTBlock
+  - [-1, 1, UltraRepViTBlock, [96, [3, 5, 7], 576, True, "SI", 1, 4, 192, 4]]  # Deeper layer: use UltraRepViTBlock
+  - [-1, 1, UltraRepViTBlock, [96, [3, 5, 7], 576, True, "SI", 1, 4, 192, 4]]  # Deeper layer: use UltraRepViTBlock
+  - [-1, 1, UltraRepViTBlock, [96, [3, 5, 7], 576, True, "SI", 1, 4, 192, 4]]  # Deeper layer: use UltraRepViTBlock
+  - [-1, 1, SPPF, [96, 5]]
+
+head:
+  - [-1, 1, nn.Upsample, [None, 2, 'nearest']]
+  - [[-1, 9], 1, Concat, [1]]
+  - [-1, 1, UltraRepViTBlock, [64, [3, 5, 7], 128, True, "SI", 1, 4, 128, 4]]  # Head: use UltraRepViTBlock
+  - [-1, 1, UltraRepViTBlock, [64, [3, 5, 7], 128, True, "SI", 1, 4, 128, 4]]  # Head: use UltraRepViTBlock
+  - [-1, 1, UltraRepViTBlock, [64, [3, 5, 7], 128, True, "SI", 1, 4, 128, 4]]  # Head: use UltraRepViTBlock
+
+  - [-1, 1, nn.Upsample, [None, 2, 'nearest']]
+  - [[-1, 4], 1, Concat, [1]]
+  - [-1, 1, UltraRepViTBlock, [32, [3, 5], 96, True, "SI", 1, 4, 64, 4]]  # Head: use UltraRepViTBlock, smaller kernel_sizes
+  - [-1, 1, UltraRepViTBlock, [32, [3, 5], 64, True, "SI", 1, 4, 64, 4]]   # Head: use UltraRepViTBlock, smaller kernel_sizes
+  - [-1, 1, UltraRepViTBlock, [32, [3, 5], 64, True, "SI", 1, 4, 64, 4]]   # Head: use UltraRepViTBlock, smaller kernel_sizes
+
+  - [-1, 1, mn_conv, [64, 3, 2, "SI"]]
+  - [[-1, 19], 1, Concat, [1]]
+  - [-1, 1, UltraRepViTBlock, [64, [3, 5, 7], 128, True, "SI", 1, 4, 128, 4]]  # Head: use UltraRepViTBlock
+  - [-1, 1, UltraRepViTBlock, [64, [3, 5, 7], 128, True, "SI", 1, 4, 128, 4]]  # Head: use UltraRepViTBlock
+  - [-1, 1, UltraRepViTBlock, [64, [3, 5, 7], 128, True, "SI", 1, 4, 128, 4]]  # Head: use UltraRepViTBlock
+
+  - [-1, 1, mn_conv, [96, 3, 2, "SI"]]
+  - [[-1, 14], 1, Concat, [1]]
+  - [-1, 1, UltraRepViTBlock, [96, [3, 5, 7], 192, True, "SI", 1, 4, 192, 4]]  # Head: use UltraRepViTBlock
+  - [-1, 1, UltraRepViTBlock, [96, [3, 5, 7], 192, True, "SI", 1, 4, 192, 4]]  # Head: use UltraRepViTBlock
+  - [-1, 1, UltraRepViTBlock, [96, [3, 5, 7], 192, True, "SI", 1, 4, 192, 4]]  # Head: use UltraRepViTBlock
+
+  - [[24, 29, 34], 1, Detect, [nc]]

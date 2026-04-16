@@ -1,0 +1,50 @@
+# UltraRepViT YOLO Nano 模型结构
+nc: 80  # number of classes
+scales:
+  n: [1.0, 1.0, 320]  # depth, width, max_channels
+
+backbone:
+  # [from, repeats, module, args]
+  - [-1, 1, mn_conv, [16, 3, 2, "SI"]]
+  - [-1, 1, mn_conv, [16, 1, 1, "SI"]]
+  - [-1, 1, UltraRepViTBlock, [16, 32, False, True, [3, 5], 2]]
+  - [-1, 1, UltraRepViTBlock, [32, 64, False, True, [3, 5], 2]]
+  - [-1, 1, UltraRepViTBlock, [64, 64, False, True, [3, 5, 7], 2]]
+  - [-1, 1, UltraRepViTBlock, [64, 96, True, True, [3, 5, 7], 2]]
+  - [-1, 1, UltraRepViTBlock, [96, 128, True, True, [3, 5], 2]]
+  - [-1, 1, UltraRepViTBlock, [128, 128, True, True, [3, 5], 2]]
+  - [-1, 1, UltraRepViTBlock, [128, 128, True, True, [3, 5], 2]]
+  - [-1, 1, UltraRepViTBlock, [128, 128, True, True, [3, 5], 2]]
+  - [-1, 1, UltraRepViTBlock, [128, 192, True, True, [3, 5, 7], 4]]
+  - [-1, 1, UltraRepViTBlock, [192, 192, True, True, [3, 5, 7], 4]]
+  - [-1, 1, UltraRepViTBlock, [192, 192, True, True, [3, 5, 7], 4]]
+  - [-1, 1, UltraRepViTBlock, [192, 192, True, True, [3, 5, 7], 4]]
+  - [-1, 1, SPPF, [192, 5]]
+
+head:
+  - [-1, 1, nn.Upsample, [None, 2, 'nearest']]
+  - [[-1, 9], 1, Concat, [1]]
+  - [-1, 1, UltraRepViTBlock, [192, 128, True, True, [3, 5], 2]]
+  - [-1, 1, UltraRepViTBlock, [128, 128, True, True, [3, 5], 2]]
+  - [-1, 1, UltraRepViTBlock, [128, 128, True, True, [3, 5], 2]]
+
+  - [-1, 1, nn.Upsample, [None, 2, 'nearest']]
+  - [[-1, 4], 1, Concat, [1]]
+  - [-1, 1, UltraRepViTBlock, [128, 96, True, True, [3, 5], 2]]
+  - [-1, 1, UltraRepViTBlock, [96, 64, True, True, [3, 5], 2]]
+  - [-1, 1, UltraRepViTBlock, [64, 64, True, True, [3, 5], 2]]
+
+  - [-1, 1, mn_conv, [64, 3, 2, "SI"]]
+  - [[-1, 19], 1, Concat, [1]]
+  - [-1, 1, UltraRepViTBlock, [128, 128, True, True, [3, 5], 2]]
+  - [-1, 1, UltraRepViTBlock, [128, 128, True, True, [3, 5], 2]]
+  - [-1, 1, UltraRepViTBlock, [128, 128, True, True, [3, 5], 2]]
+
+  - [-1, 1, mn_conv, [128, 3, 2, "SI"]]
+  - [[-1, 14], 1, Concat, [1]]
+  - [-1, 1, UltraRepViTBlock, [192, 192, True, True, [3, 5], 2]]
+  - [-1, 1, UltraRepViTBlock, [192, 192, True, True, [3, 5], 2]]
+  - [-1, 1, UltraRepViTBlock, [192, 192, True, True, [3, 5], 2]]
+
+  - [[24, 29, 34], 1, Detect, [nc]]
+

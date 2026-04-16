@@ -1,0 +1,30 @@
+nc: 13
+names: ['biker', 'car', 'pedestrian', 'trafficLight', 'trafficLight-Green', 'trafficLight-GreenLeft', 'trafficLight-Red', 'trafficLight-RedLeft', 'trafficLight-Yellow', 'trafficLight-YellowLeft', 'truck', 'face', 'plates']
+
+
+# Train/val/test sets as 1) dir: path/to/imgs, 2) file: path/to/imgs.txt, or 3) list: [path/to/imgs1, path/to/imgs2, ..]
+path: D:/capgemini/mosaic/datasets/fp1 # dataset root dir
+train: D:/capgemini/mosaic/datasets/fp1/train  # train images (relative to 'path') 128 images
+val: D:/capgemini/mosaic/datasets/fp1/valid 
+#test: /home/featurize/data/test   # test images (optional)
+
+# Classes
+names:
+  0: biker
+  1: car
+  2: pedestrian
+  3: trafficLight
+  4: trafficLight-Green
+  5: trafficLight-GreenLeft
+  6: trafficLight-Red
+  7: trafficLight-RedLeft
+  8: trafficLight-Yellow
+  9: trafficLight-YellowLeft
+  10: truck
+  11: face
+  12: license_plate
+
+
+resume: True
+epochs: 30
+batch: -1

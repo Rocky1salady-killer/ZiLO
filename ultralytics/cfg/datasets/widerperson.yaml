@@ -1,0 +1,8 @@
+
+path: E:/Caltech-Pedestrian-Dataset/wider person/kaggle/working/widerperson_yolo
+train: E:/Caltech-Pedestrian-Dataset/wider person/kaggle/working/widerperson_yolo/images/train
+val: E:/Caltech-Pedestrian-Dataset/wider person/kaggle/working/widerperson_yolo/images/val
+test: E:/Caltech-Pedestrian-Dataset/wider person/kaggle/working/widerperson_yolo/images/val
+
+names:
+  0: person
