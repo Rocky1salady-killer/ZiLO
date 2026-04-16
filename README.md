@@ -164,8 +164,6 @@ To switch variants, change the YAML path in `train.py` or at load time:
 # Train ZiLO-Base (default)
 model = YOLO("ultralytics/cfg/cfg/zilobase.yaml")
 
-# Train ZiLO-Small
-model = YOLO("ultralytics/cfg/cfg/zilosmall.yaml")
 ```
 
 ---
