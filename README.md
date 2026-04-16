@@ -73,7 +73,7 @@ The default config trains ZiLO-Base on COCO for 500 epochs with SGD on 2 GPUs. K
 
 To train on a single GPU, change `device="0,1"` to `device="0"` in `train.py`.
 
-### Validation / Testing
+### Testing
 
 ```python
 from ultralytics import YOLO
