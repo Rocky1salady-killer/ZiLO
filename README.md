@@ -12,7 +12,7 @@
 
 This block replaces standard MobileNet-style blocks throughout both the backbone and neck, yielding strong accuracy–efficiency trade-offs on dense pedestrian benchmarks such as CrowdHuman, CityPersons, and WiderPerson.
 
-![inference](gitimg/inference.jpg)
+![inference](gitimg/all_results.jpg)
 
 ---
 
