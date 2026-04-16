@@ -1,8 +1,7 @@
 # ZiLO: A Lightweight, Stackable and Scalable Framework for Dense Pedestrian Detection
 
-| Framework | Accuracy–Efficiency Trade-off |
-|:---------:|:-----------------------------:|
-| [Pipeline (PDF)](gitimg/pipeline.png) | [Pareto Curve (PDF)](gitimg/front1.jpg) |
+![Framework](gitimg/pipeline.png)
+![Main results](gitimg/front1.jpg)
 
 ## Introduction
 
