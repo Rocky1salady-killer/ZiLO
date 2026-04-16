@@ -48,4 +48,4 @@ if __name__ == '__main__':
         save_period=50,
     )
 
-    model.val(data="ultralytics/cfg/datasets/coco.yaml", imgsz=640, max_det=300)
+    model.val(data="ultralytics/cfg/datasets/crowdhuman.yaml", imgsz=640, max_det=300)
