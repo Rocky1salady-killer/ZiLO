@@ -39,13 +39,6 @@ Replace the path below with the absolute path to your local copy of this repo:
 export PYTHONPATH=/path/to/ZiLO
 ```
 
-### Install the package in editable mode
-
-```bash
-cd ZiLO
-pip install -e .
-```
-
 ---
 
 ## Quickstart
