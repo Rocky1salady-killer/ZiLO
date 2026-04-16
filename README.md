@@ -1,4 +1,4 @@
-# ZiLO: A Lightweight, Stackable and Scalable Framework for Dense Pedestrian Detection
+## ZiLO: A Lightweight, Stackable and Scalable Framework for Dense Pedestrian Detection
 
 ![Framework](gitimg/pipeline.png)
 
