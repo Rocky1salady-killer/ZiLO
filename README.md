@@ -2,7 +2,7 @@
 
 | Framework | Accuracy–Efficiency Trade-off |
 |:---------:|:-----------------------------:|
-| [Pipeline (PDF)](gitimg/fig_framework.pdf) | [Pareto Curve (PDF)](gitimg/fig_pareto.pdf) |
+| [Pipeline (PDF)](gitimg/pipeline.png) | [Pareto Curve (PDF)](gitimg/front1.jpg) |
 
 ## Introduction
 
