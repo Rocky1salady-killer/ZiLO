@@ -157,7 +157,6 @@ ZiLO ships two architecture YAMLs:
 | File | Block | Description |
 |------|-------|-------------|
 | `ultralytics/cfg/cfg/zilobase.yaml` | `EfficientMobileNetBlock` | ZiLO-Base — full adaptive block |
-| `ultralytics/cfg/cfg/zilosmall.yaml` | `MobileNetV3_BLOCK` | ZiLO-Small — standard MobileNetV3 block, lighter baseline |
 
 To switch variants, change the YAML path in `train.py` or at load time:
 
