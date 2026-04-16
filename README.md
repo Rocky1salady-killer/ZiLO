@@ -96,20 +96,19 @@ model.val(data="ultralytics/cfg/datasets/crowdhuman.yaml", imgsz=640, max_det=30
 from ultralytics import YOLO
 
 model = YOLO("weights/ZiLOBase-coco.pt")
-results = model("your_image.jpg")
+results = model("gitimg/bus.jpg")
 results[0].show()
 ```
-
-**On a video file:**
-
-```python
-results = model("your_video.mp4", save=True)
-```
-
 **Live from webcam:**
 
 ```bash
 python inferencelocalweb.py
+```
+### Export to TensorRT
+
+For custom architectures, use FP16 (half=True) to achieve maximum performance on NVIDIA GPUs
+```bash
+python exportmodel.py
 ```
 
 ---
