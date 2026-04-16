@@ -192,3 +192,13 @@ Attention policy (applied to intermediate channels `c_mid`):
 ## Acknowledgements
 
 ZiLO is built on the [Ultralytics](https://github.com/ultralytics/ultralytics) framework and the [LeYOLO](https://github.com/LilianHollard/LeYOLO) backbone design. We thank Lilian and the Ultralytics team for their excellent open-source work.
+
+Please follow their outstanding work:
+
+```
+@article{hollard2024leyolo,
+  title={LeYOLO, New Embedded Architecture for Object Detection},
+  author={Hollard, Lilian and Mohimont, Lucas and Gaveau, Nathalie and Steffenel, Luiz Angelo},
+  journal={arXiv preprint arXiv:2406.14239},
+  year={2024}
+}
