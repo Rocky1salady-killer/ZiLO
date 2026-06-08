@@ -41,11 +41,15 @@ export PYTHONPATH=/path/to/ZiLO
 
 ### Docker for edge deployment
 
-For edge-side testing, we also provide a very lightweight Docker setup. The current [Dockerfile](/workspace/zilo-main/Dockerfile) uses an existing vision-ready base image:
+For edge-side testing, we also provide a lightweight Jetson-oriented Docker setup. The current [Dockerfile](/workspace/zilo-main/Dockerfile) is based on NVIDIA's L4T PyTorch image and keeps the environment simple for TensorRT export and webcam demos:
 
 ```dockerfile
-FROM perception:vision
+FROM nvcr.io/nvidia/l4t-pytorch:r35.2.1-pth2.0-py3
 WORKDIR /workspace/zilo-main
+RUN apt-get update && apt-get install -y --no-install-recommends python3-opencv
+RUN pip3 uninstall -y opencv-python opencv-python-headless opencv-contrib-python || true
+COPY requirements-jetson.txt /tmp/requirements-jetson.txt
+RUN pip3 install --no-cache-dir -r /tmp/requirements-jetson.txt
 COPY . .
 CMD ["bash"]
 ```
