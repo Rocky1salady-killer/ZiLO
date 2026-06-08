@@ -39,6 +39,41 @@ Replace the path below with the absolute path to your local copy of this repo:
 export PYTHONPATH=/path/to/ZiLO
 ```
 
+### Docker for edge deployment
+
+For edge-side testing, we also provide a very lightweight Docker setup. The current [Dockerfile](/workspace/zilo-main/Dockerfile) uses an existing vision-ready base image:
+
+```dockerfile
+FROM perception:vision
+WORKDIR /workspace/zilo-main
+COPY . .
+CMD ["bash"]
+```
+
+Build the image:
+
+```bash
+docker build -t zilo:edge .
+```
+
+Run it on a Jetson / edge device with GPU access:
+
+```bash
+docker run --rm -it \
+  --net=host \
+  --ipc=host \
+  --runtime=nvidia \
+  -v $(pwd):/workspace/zilo-main \
+  -w /workspace/zilo-main \
+  zilo:edge
+```
+
+If you want a clean dependency install inside the container, you can also use:
+
+```bash
+pip install -r requirements-jetson.txt
+```
+
 ---
 
 ## Quickstart
@@ -99,10 +134,39 @@ python inferencelocalweb.py
 ```
 ### Export to TensorRT
 
-For custom architectures, use FP16 (half=True) to achieve maximum performance on NVIDIA GPUs
+For custom architectures, use FP16 (`half=True`) to achieve maximum performance on NVIDIA GPUs:
+
 ```bash
 python exportmodel.py
 ```
+
+The current [exportmodel.py](/workspace/zilo-main/exportmodel.py) is a minimal helper that converts selected `.pt` checkpoints into TensorRT `.engine` files:
+
+```python
+from ultralytics import YOLO
+
+model = YOLO("train-crowd/zilo4small-640/train/weights/best.pt")
+model.export(
+    format="engine",
+    dynamic=False,
+    imgsz=640,
+    batch=1,
+    workspace=4,
+    half=True,
+    device=0,
+)
+```
+
+To export your own model, simply edit the `model_dirs` list in `exportmodel.py` and replace it with the checkpoint directories you want to convert.
+
+Typical output:
+
+```text
+train-crowd/your_model/train/weights/best.pt
+-> train-crowd/your_model/train/weights/best.engine
+```
+
+This is the recommended path when deploying ZiLO on Jetson-class or other NVIDIA edge devices.
 
 ---
 
