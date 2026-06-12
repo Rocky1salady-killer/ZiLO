@@ -41,7 +41,7 @@ export PYTHONPATH=/path/to/ZiLO
 
 ### Docker for edge deployment
 
-For edge-side testing, we also provide a lightweight Jetson-oriented Docker setup. The current [Dockerfile](/workspace/zilo-main/Dockerfile) is based on NVIDIA's L4T PyTorch image and keeps the environment simple for TensorRT export and webcam demos:
+For edge-side testing, we also provide a lightweight Jetson-oriented Docker setup. The current [Dockerfile](/ZiLO/Dockerfile) is based on NVIDIA's L4T PyTorch image and keeps the environment simple for TensorRT export and webcam demos:
 
 ```dockerfile
 FROM nvcr.io/nvidia/l4t-pytorch:r35.2.1-pth2.0-py3
