@@ -144,7 +144,7 @@ For custom architectures, use FP16 (`half=True`) to achieve maximum performance 
 python exportmodel.py
 ```
 
-The current [exportmodel.py](/workspace/zilo-main/exportmodel.py) is a minimal helper that converts selected `.pt` checkpoints into TensorRT `.engine` files:
+The current [exportmodel.py](exportmodel.py) is a minimal helper that converts selected `.pt` checkpoints into TensorRT `.engine` files:
 
 ```python
 from ultralytics import YOLO
